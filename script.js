@@ -15,5 +15,35 @@ function revealOnScroll() {
   }
 }
 
+
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll(); // Pour activer si déjà visible
+
+// Lightbox pour la galerie
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.querySelector('.lightbox-img');
+const lightboxPrice = document.querySelector('.lightbox-price');
+const closeBtn = document.querySelector('.lightbox .close');
+
+galleryItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const imgSrc = item.querySelector('img').src;
+    const price = item.querySelector('.price').textContent;
+    lightboxImg.src = imgSrc;
+    lightboxPrice.textContent = price;
+    lightbox.style.display = 'flex';
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+// Fermer lightbox en cliquant en dehors de l'image
+lightbox.addEventListener('click', e => {
+  if(e.target === lightbox) {
+    lightbox.style.display = 'none';
+  }
+});
+
